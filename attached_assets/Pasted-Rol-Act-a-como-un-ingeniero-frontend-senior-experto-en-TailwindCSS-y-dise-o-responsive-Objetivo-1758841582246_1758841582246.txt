@@ -1,0 +1,84 @@
+Rol: Actúa como un ingeniero frontend senior experto en TailwindCSS y diseño responsive.
+
+Objetivo: Corregir el odontograma para que sea 100% responsive.  
+Actualmente en PC se ve bien, pero en móviles los botones de dientes se salen del contenedor y aparece scroll lateral.  
+
+Contexto actual:  
+- Cada diente está representado como un botón cuadrado numerado.  
+- En desktop se espera que los dientes se distribuyan en filas completas (como una arcada dental).  
+- En móvil queremos que se adapten automáticamente al ancho de pantalla sin overflow horizontal.  
+
+Instrucciones paso a paso:
+
+1. Revisa cómo está implementado el odontograma ahora.  
+   - Si usas `flex`, probablemente no haya `flex-wrap`.  
+   - Si los botones tienen `width` fijo en píxeles, reemplázalo por un ancho relativo (`w-full`) dentro de un grid.  
+
+2. Refactoriza el contenedor de los dientes a usar **grid responsivo** con Tailwind:  
+   ```tsx
+   <div className="grid grid-cols-8 sm:grid-cols-12 gap-2 w-full max-w-2xl mx-auto">
+     {teeth.map((tooth) => (
+       <button
+         key={tooth}
+         className="aspect-square w-full max-w-[50px] border rounded flex items-center justify-center text-sm hover:bg-blue-100"
+       >
+         {tooth}
+       </button>
+     ))}
+   </div>
+Explicación:
+
+grid-cols-8 → En móvil muestra 8 columnas.
+
+sm:grid-cols-12 → En pantallas medianas o grandes usa 12 columnas.
+
+aspect-square → Cada botón siempre es cuadrado.
+
+w-full max-w-[50px] → Se ajusta al ancho de columna, pero no supera 50px.
+
+Ajusta los títulos ("Arcada Superior", "Arcada Inferior") para que estén centrados encima de cada sección. Ejemplo:
+
+tsx
+Copiar código
+<h3 className="col-span-full text-center font-semibold mt-4">Arcada Superior</h3>
+Verifica que el layout se mantenga:
+
+En PC: las filas de dientes se ven largas, similares a como está ahora.
+
+En móvil: los dientes se reorganizan automáticamente en múltiples filas dentro del ancho de pantalla.
+
+Asegúrate de que el contenedor padre tenga w-full y overflow-x-hidden para evitar scroll lateral innecesario.
+
+tsx
+Copiar código
+<div className="w-full overflow-x-hidden px-2">
+  {/* odontograma */}
+</div>
+Restricciones:
+
+No modifiques la lógica de selección de dientes ni los handlers de eventos.
+
+No cambies la lógica de guardado de la orden, solo el layout.
+
+Mantén la UI simple y clara.
+
+Definición de "Hecho":
+✅ En PC se ven los dientes distribuidos como ahora.
+✅ En móvil los dientes se adaptan, se reacomodan en filas y desaparece el scroll horizontal.
+✅ Los botones siguen siendo cuadrados, con número centrado.
+✅ Los títulos "Arcada Superior" y "Arcada Inferior" se mantienen claros y alineados.
+
+yaml
+Copiar código
+
+---
+
+🔑 Con esto, Replit IA no debería tener dudas. Solo tiene que aplicar este grid responsivo en el componente del odontograma.  
+
+¿Quieres que además te prepare el **archivo odontograma.html / .tsx completo ya corregido** para que solo lo pegues en Replit?
+
+
+
+
+
+Preguntar a ChatGPT

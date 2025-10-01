@@ -1,0 +1,77 @@
+Corrige y amplía la funcionalidad en el módulo Dashboard Laboratorio.
+
+1. Gestión de Doctores (imagen 2)
+
+Botón Editar (no funcional actualmente):
+
+Implementar formulario modal que permita actualizar datos del doctor:
+
+Nombre
+
+Correo
+
+Teléfono
+
+Estado (Activo/Inactivo)
+
+Precargar datos actuales del doctor.
+
+Al guardar, llamar al endpoint PUT /doctors/{doctorId} y actualizar la tabla sin recargar la página.
+
+Botón Eliminar (no funcional actualmente):
+
+Implementar acción que llame al endpoint DELETE /doctors/{doctorId}.
+
+Antes de eliminar, mostrar confirmación: “¿Seguro que deseas eliminar este doctor?”
+
+Al confirmar, eliminar el registro en base de datos y actualizar tabla de forma inmediata.
+
+2. Creación de Orden (imagen 3)
+
+Nueva opción: “Asignar orden a un doctor”
+
+En el formulario de creación de órdenes, agregar un campo desplegable (dropdown) con label: Asignar a Doctor.
+
+El dropdown debe listar únicamente los doctores asignados a ese laboratorio (GET /labs/{labId}/doctors).
+
+Este campo es opcional:
+
+Si se selecciona doctor → la orden queda vinculada a ese doctor.
+
+Si no se selecciona doctor → la orden pertenece solo al laboratorio.
+
+Al guardar, enviar en el payload del endpoint POST /orders:
+
+{
+  "labId": "123",
+  "doctorId": "456",   // opcional
+  "valorEstimado": 4490,
+  "observaciones": "...",
+  "instruccionesEspeciales": "...",
+  "servicios": ["Corona", "Implante"],
+  "odontograma": [...]
+}
+
+3. Validación final
+
+En la Gestión de Doctores:
+
+Al dar clic en Editar → debe abrir modal con datos actuales y permitir guardar cambios.
+
+Al dar clic en Eliminar → debe preguntar confirmación y eliminar registro en la tabla.
+
+En la Creación de Órdenes:
+
+Si selecciono un doctor del dropdown y creo la orden → debe quedar registrada con ese doctor.
+
+Si no selecciono ningún doctor → la orden queda solo vinculada al laboratorio.
+
+Al consultar órdenes de un laboratorio, debe verse claramente a qué doctor (si alguno) está asignada.
+
+4. Entrega esperada
+
+Código frontend actualizado (componentes de doctores y formulario de orden).
+
+Endpoints backend PUT /doctors/{doctorId}, DELETE /doctors/{doctorId}, GET /labs/{labId}/doctors y actualización de POST /orders para aceptar doctorId.
+
+Ejemplos JSON de request/response para cada flujo.

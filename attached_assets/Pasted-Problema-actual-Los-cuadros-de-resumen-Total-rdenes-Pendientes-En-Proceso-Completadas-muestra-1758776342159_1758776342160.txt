@@ -1,0 +1,77 @@
+Problema actual:
+Los cuadros de resumen (Total Órdenes, Pendientes, En Proceso, Completadas) muestran solo valores estáticos o vacíos y no tienen interactividad.
+
+Requerimientos funcionales:
+
+Datos reales
+
+Total Órdenes: cantidad total de órdenes asociadas al doctor logueado.
+
+Pendientes: número de órdenes en estado pendiente de este doctor.
+
+En Proceso: número de órdenes en estado en_proceso.
+
+Completadas: número de órdenes en estado completada.
+
+Estos valores deben consultarse dinámicamente desde el backend:
+
+Endpoint: GET /doctors/{doctorId}/orders (retorna todas las órdenes del doctor).
+
+El frontend debe contar y agrupar por estado.
+
+Interactividad
+
+Cada cuadro debe ser clickeable.
+
+Al hacer clic, debe abrir un modal o vista con la lista de órdenes filtradas por ese estado.
+
+Cada fila de la lista debe mostrar:
+
+Número de orden
+
+Fecha
+
+Laboratorio asignado
+
+Estado actual
+
+Valor estimado
+
+Actualización dinámica
+
+Cuando se cree una nueva orden, cambie su estado, o se complete, los números deben actualizarse automáticamente sin recargar la página.
+
+Validaciones
+
+Si el doctor no tiene órdenes en un estado, mostrar mensaje: “No hay órdenes en este estado”.
+
+Si ocurre error al cargar datos, mostrar mensaje: “Error al cargar órdenes. Intenta nuevamente.”
+
+Validación final:
+
+Ingresar al Dashboard Doctor → los números deben coincidir con los datos reales en base de datos.
+
+Dar clic en “Pendientes” → debe mostrar lista solo con órdenes pendientes del doctor.
+
+Crear una orden pendiente para ese doctor → el cuadro “Pendientes” debe aumentar automáticamente.
+
+Completar una orden → debe desaparecer de “En Proceso” y sumarse a “Completadas”.
+
+Entrega esperada:
+
+Código frontend actualizado (componentes de estadísticas + modal de lista de órdenes).
+
+Endpoint backend GET /doctors/{doctorId}/orders si no existe.
+
+Ejemplo JSON de respuesta esperado:
+
+[
+  {
+    "orderId": 201,
+    "doctorId": 10,
+    "labId": 3,
+    "estado": "pendiente",
+    "valor": 900,
+    "fecha": "2023-09-18"
+  }
+]

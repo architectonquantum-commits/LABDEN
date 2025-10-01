@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Odontograma Móvil</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            padding: 10px;
+        }
+        
+        .odontograma-container {
+            background: white;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            max-width: 100vw;
+            overflow-x: auto;
+        }
+        
+        .title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 16px;
+            color: #333;
+        }
+        
+        .instructions {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 20px;
+            background: #f8f9fa;
+            padding: 8px;
+            border-radius: 4px;
+        }
+        
+        .arcada-section {
+            margin-bottom: 24px;
+        }
+        
+        .arcada-title {
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        
+        .teeth-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 4px;
+            justify-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .tooth {
+            width: 32px;
+            height: 32px;
+            border: 2px solid #d1d5db;
+            border-radius: 4px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 500;
+            color: #374151;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .tooth:hover {
+            background-color: #3b82f6;
+            color: white;
+            border-color: #1d4ed8;
+        }
+        
+        .tooth:active {
+            transform: scale(0.95);
+        }
+        
+        .tooth.selected {
+            background-color: #3b82f6;
+            color: white;
+            border-color: #1d4ed8;
+        }
+        
+        /* Para pantallas muy pequeñas */
+        @media (max-width: 360px) {
+            .tooth {
+                width: 28px;
+                height: 28px;
+                font-size: 10px;
+            }
+            
+            .teeth-grid {
+                gap: 2px;
+            }
+        }
+        
+        /* Para pantallas más grandes */
+        @media (min-width: 640px) {
+            .tooth {
+                width: 40px;
+                height: 40px;
+                font-size: 12px;
+            }
+            
+            .teeth-grid {
+                gap: 6px;
+            }
+        }
+        
+        .clear-btn {
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            padding: 8px 16px;
+            font-size: 12px;
+            cursor: pointer;
+            float: right;
+            margin-bottom: 16px;
+        }
+        
+        .clear-btn:hover {
+            background: #e5e7eb;
+        }
+        
+        .conditions-summary {
+            margin-top: 20px;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        
+        .condition-badge {
+            display: inline-block;
+            background: #3b82f6;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 12px;
+            font-size: 10px;
+            margin: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="odontograma-container">
+        <div class="title">Odontograma</div>
+        
+        <button class="clear-btn" onclick="clearAll()">🔄 Limpiar</button>
+        
+        <div class="instructions">
+            Haz clic en cualquier diente para seleccionar sus condiciones
+        </div>
+        
+        <!-- Arcada Superior -->
+        <div class="arcada-section">
+            <div class="arcada-title">Arcada Superior</div>
+            
+            <!-- Fila 1: Dientes 18-11 -->
+            <div class="teeth-grid">
+                <div class="tooth" onclick="selectTooth(18)" id="tooth-18">18</div>
+                <div class="tooth" onclick="selectTooth(17)" id="tooth-17">17</div>
+                <div class="tooth" onclick="selectTooth(16)" id="tooth-16">16</div>
+                <div class="tooth" onclick="selectTooth(15)" id="tooth-15">15</div>
+                <div class="tooth" onclick="selectTooth(14)" id="tooth-14">14</div>
+                <div class="tooth" onclick="selectTooth(13)" id="tooth-13">13</div>
+                <div class="tooth" onclick="selectTooth(12)" id="tooth-12">12</div>
+                <div class="tooth" onclick="selectTooth(11)" id="tooth-11">11</div>
+            </div>
+            
+            <!-- Fila 2: Dientes 21-28 -->
+            <div class="teeth-grid">
+                <div class="tooth" onclick="selectTooth(21)" id="tooth-21">21</div>
+                <div class="tooth" onclick="selectTooth(22)" id="tooth-22">22</div>
+                <div class="tooth" onclick="selectTooth(23)" id="tooth-23">23</div>
+                <div class="tooth" onclick="selectTooth(24)" id="tooth-24">24</div>
+                <div class="tooth" onclick="selectTooth(25)" id="tooth-25">25</div>
+                <div class="tooth" onclick="selectTooth(26)" id="tooth-26">26</div>
+                <div class="tooth" onclick="selectTooth(27)" id="tooth-27">27</div>
+                <div class="tooth" onclick="selectTooth(28)" id="tooth-28">28</div>
+            </div>
+        </div>
+        
+        <!-- Arcada Inferior -->
+        <div class="arcada-section">
+            <div class="arcada-title">Arcada Inferior</div>
+            
+            <!-- Fila 3: Dientes 48-41 -->
+            <div class="teeth-grid">
+                <div class="tooth" onclick="selectTooth(48)" id="tooth-48">48</div>
+                <div class="tooth" onclick="selectTooth(47)" id="tooth-47">47</div>
+                <div class="tooth" onclick="selectTooth(46)" id="tooth-46">46</div>
+                <div class="tooth" onclick="selectTooth(45)" id="tooth-45">45</div>
+                <div class="tooth" onclick="selectTooth(44)" id="tooth-44">44</div>
+                <div class="tooth" onclick="selectTooth(43)" id="tooth-43">43</div>
+                <div class="tooth" onclick="selectTooth(42)" id="tooth-42">42</div>
+                <div class="tooth" onclick="selectTooth(41)" id="tooth-41">41</div>
+            </div>
+            
+            <!-- Fila 4: Dientes 31-38 -->
+            <div class="teeth-grid">
+                <div class="tooth" onclick="selectTooth(31)" id="tooth-31">31</div>
+                <div class="tooth" onclick="selectTooth(32)" id="tooth-32">32</div>
+                <div class="tooth" onclick="selectTooth(33)" id="tooth-33">33</div>
+                <div class="tooth" onclick="selectTooth(34)" id="tooth-34">34</div>
+                <div class="tooth" onclick="selectTooth(35)" id="tooth-35">35</div>
+                <div class="tooth" onclick="selectTooth(36)" id="tooth-36">36</div>
+                <div class="tooth" onclick="selectTooth(37)" id="tooth-37">37</div>
+                <div class="tooth" onclick="selectTooth(38)" id="tooth-38">38</div>
+            </div>
+        </div>
+        
+        <!-- Resumen de condiciones seleccionadas -->
+        <div id="conditions-summary" class="conditions-summary" style="display: none;">
+            <div style="font-weight: 600; margin-bottom: 8px;">Condiciones Seleccionadas:</div>
+            <div id="selected-conditions"></div>
+        </div>
+    </div>
+
+    <script>
+        let selectedTeeth = {};
+        
+        function selectTooth(toothNumber) {
+            const tooth = document.getElementById(`tooth-${toothNumber}`);
+            
+            if (selectedTeeth[toothNumber]) {
+                // Deseleccionar
+                delete selectedTeeth[toothNumber];
+                tooth.classList.remove('selected');
+            } else {
+                // Seleccionar
+                selectedTeeth[toothNumber] = ['Caries']; // Condición por defecto
+                tooth.classList.add('selected');
+            }
+            
+            updateConditionsSummary();
+        }
+        
+        function clearAll() {
+            selectedTeeth = {};
+            document.querySelectorAll('.tooth').forEach(tooth => {
+                tooth.classList.remove('selected');
+            });
+            updateConditionsSummary();
+        }
+        
+        function updateConditionsSummary() {
+            const summary = document.getElementById('conditions-summary');
+            const conditionsDiv = document.getElementById('selected-conditions');
+            
+            if (Object.keys(selectedTeeth).length === 0) {
+                summary.style.display = 'none';
+                return;
+            }
+            
+            summary.style.display = 'block';
+            conditionsDiv.innerHTML = '';
+            
+            Object.entries(selectedTeeth).forEach(([tooth, conditions]) => {
+                conditions.forEach(condition => {
+                    const badge = document.createElement('span');
+                    badge.className = 'condition-badge';
+                    badge.textContent = `Diente ${tooth}: ${condition}`;
+                    conditionsDiv.appendChild(badge);
+                });
+            });
+        }
+        
+        // Log de verificación
+        console.log('Odontograma cargado - 4 filas confirmadas');
+        console.log('Dientes superiores: 18-11, 21-28');
+        console.log('Dientes inferiores: 48-41, 31-38');
+    </script>
+</body>
+</html>

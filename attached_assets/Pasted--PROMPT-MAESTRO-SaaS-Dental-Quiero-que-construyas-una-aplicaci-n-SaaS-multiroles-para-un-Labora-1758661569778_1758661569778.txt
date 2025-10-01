@@ -1,0 +1,210 @@
+🧠 PROMPT MAESTRO – SaaS Dental
+
+Quiero que construyas una aplicación SaaS multiroles para un Laboratorio Dental.
+
+🎯 Objetivo
+
+La aplicación debe permitir que los dentistas creen órdenes de trabajo para un laboratorio dental, que el laboratorio gestione y complete esas órdenes, y que el superadmin supervise todo el sistema.
+
+🎭 Roles de Usuario
+1. SuperAdmin
+
+Puede:
+
+Crear laboratorios.
+
+Crear usuarios de laboratorio (administradores).
+
+Ver métricas globales.
+
+Dashboard:
+
+Total de laboratorios.
+
+Total de doctores.
+
+Total de órdenes globales.
+
+Órdenes por laboratorio (gráfico).
+
+Órdenes por estado (pendiente, en proceso, completada).
+
+2. Laboratorio Dental
+
+Puede:
+
+Ver dashboard con métricas:
+
+Total órdenes.
+
+Pendientes.
+
+En proceso.
+
+Completadas.
+
+Valor total ($).
+
+Gestionar órdenes (cambiar estado).
+
+Dar de alta doctores asociados a su laboratorio.
+
+Recibir notificaciones cuando un doctor crea una nueva orden.
+
+Dashboard:
+
+Tarjetas de métricas.
+
+Lista de órdenes recientes.
+
+Estadísticas rápidas (gráfico).
+
+Sección de gestión de doctores (CRUD de doctores).
+
+3. Doctor/Dentista
+
+Puede:
+
+Crear nueva orden de trabajo.
+
+Ver sus órdenes en 3 categorías: pendientes, en proceso, completadas.
+
+Recibir notificación cuando el laboratorio finaliza su orden.
+
+Dashboard:
+
+Tarjetas de métricas (total, pendientes, en proceso, finalizadas).
+
+Lista de órdenes recientes.
+
+Botón “Nueva Orden”.
+
+📦 Modelo de Datos
+Users
+{
+  "id": 1,
+  "name": "Juan Pérez",
+  "email": "juan@lab.com",
+  "password_hash": "xxx",
+  "role": "superadmin | laboratorio | doctor",
+  "lab_id": 2  // null si es superadmin
+}
+
+Labs
+{
+  "id": 2,
+  "name": "Laboratorio Dental Sonrisa",
+  "address": "Calle 123",
+  "phone": "555-1234"
+}
+
+Orders
+{
+  "id": 1,
+  "doctor_id": 5,
+  "lab_id": 2,
+  "status": "pendiente | en_proceso | completada",
+  "value": 1500.00,
+  "odontograma": {
+    "11": ["ausente"],
+    "14": ["caries", "endodoncia"]
+  },
+  "services": ["cucharilla", "modelo_estudio"],
+  "observaciones": "Texto libre",
+  "instrucciones": "Texto libre",
+  "created_at": "2025-09-23"
+}
+
+Notifications
+{
+  "id": 1,
+  "user_id": 5,
+  "type": "new_order | order_completed",
+  "message": "El Dr. López creó la orden #234",
+  "status": "unread",
+  "created_at": "2025-09-23"
+}
+
+🖥️ Funcionalidades Clave
+Autenticación
+
+Login con email/password.
+
+JWT con roles.
+
+Redirección según rol al dashboard correcto.
+
+Órdenes
+
+El doctor crea orden → se notifica al laboratorio.
+
+El laboratorio cambia estado a “completada” → se notifica al doctor.
+
+Orden incluye odontograma interactivo (selección de dientes con condiciones: caries, ausente, fractura, etc.).
+
+Notificaciones
+
+Guardadas en tabla Notifications.
+
+Mostradas en icono 🔔 en header.
+
+Marcadas como leídas al abrir.
+
+Gestión de Doctores
+
+Laboratorio puede dar de alta doctores (CRUD).
+
+📊 Frontend (React + Tailwind)
+
+3 dashboards distintos según rol.
+
+Navbar superior con:
+
+Logo.
+
+Dashboard, Órdenes, Nueva Orden (según rol).
+
+Icono 🔔 de notificaciones.
+
+UI con tarjetas de métricas + listas + gráficos simples (Recharts).
+
+⚙️ Backend (Node.js + Express)
+
+Rutas:
+
+/auth → login/register.
+
+/labs → CRUD laboratorios.
+
+/users → CRUD usuarios (limitado según rol).
+
+/orders → CRUD órdenes + cambio de estado.
+
+/notifications → listar, marcar como leídas.
+
+Middleware:
+
+Autenticación JWT.
+
+Validación de roles.
+
+🗄️ Base de Datos
+
+Usar SQLite para prototipo (fácil en Replit).
+
+Preparado para escalar a PostgreSQL.
+
+🚀 MVP esperado
+
+Login con 3 roles funcionando.
+
+Dashboards iniciales para cada rol.
+
+CRUD de laboratorios, usuarios, órdenes.
+
+Odontograma interactivo en creación de órdenes.
+
+Sistema de notificaciones funcional.
+
+👉 Tarea para la IA programadora:
+Genera la estructura completa del proyecto (frontend + backend) lista para correr en Replit, con los módulos descritos, incluyendo ejemplos de seed data (1 superadmin, 1 laboratorio, 1 doctor, 1 orden de prueba).

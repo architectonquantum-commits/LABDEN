@@ -1,0 +1,78 @@
+Aquí tienes un prompt súper específico y completo para que Replit resuelva el problema del odontograma en móviles de una vez:
+
+INSTRUCCIONES CRÍTICAS - LEE COMPLETAMENTE ANTES DE EMPEZAR:
+Necesito que OBLIGATORIAMENTE arregles el problema de visualización del odontograma en dispositivos móviles. El odontograma NO se está mostrando correctamente en pantalla completa en móviles.
+REQUISITOS ESPECÍFICOS QUE DEBES CUMPLIR:
+
+RESPONSIVE DESIGN OBLIGATORIO:
+
+El odontograma debe ocupar el 100% del ancho disponible en móviles
+Debe ser completamente scrolleable horizontal y verticalmente
+Los dientes deben mantener su proporción pero adaptarse al tamaño de pantalla
+
+
+CSS QUE DEBES IMPLEMENTAR:
+
+css/* Contenedor principal del odontograma */
+.odontograma-container {
+    width: 100vw;
+    height: auto;
+    overflow-x: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* Grid de dientes responsive */
+.arcada-superior, .arcada-inferior {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    margin: 10px 0;
+}
+
+/* Dientes individuales */
+.diente {
+    min-width: 35px;
+    min-height: 35px;
+    flex: 0 0 auto;
+    font-size: clamp(10px, 2.5vw, 14px);
+}
+
+/* Media query para móviles */
+@media (max-width: 768px) {
+    .odontograma-container {
+        padding: 5px;
+    }
+    .diente {
+        min-width: 30px;
+        min-height: 30px;
+    }
+}
+
+VIEWPORT META TAG OBLIGATORIO:
+
+html<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+VERIFICACIONES QUE DEBES HACER ANTES DE DECIR "TERMINADO":
+
+✅ Abrir en modo responsive de Chrome DevTools (iPhone, Android)
+✅ Verificar que se puede hacer scroll horizontal en el odontograma
+✅ Confirmar que todos los dientes son visibles y clickeables
+✅ Probar en al menos 3 tamaños de pantalla diferentes (320px, 375px, 768px)
+✅ Verificar que el texto dentro de los dientes sea legible
+
+
+
+ACCIONES ESPECÍFICAS:
+
+Revisa TODO el CSS relacionado con el odontograma
+Implementa las reglas CSS que te di arriba
+Asegúrate de que el HTML tenga la estructura correcta
+PRUEBA en modo responsive ANTES de decir que está listo
+Si algo no funciona, ajusta los valores hasta que funcione perfectamente
+
+NO DIGAS "TERMINADO" HASTA QUE HAYAS VERIFICADO CADA PUNTO DE LA LISTA DE VERIFICACIONES.
+Si después de esto el problema persiste, muéstrame exactamente qué CSS estás usando para el odontograma y qué errores específicos ves en la consola del móvil.

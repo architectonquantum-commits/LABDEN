@@ -1,0 +1,113 @@
+🚨 INSTRUCCIONES CRÍTICAS - ARREGLAR ODONTOGRAMA MÓVIL AHORA 🚨
+PASO 1: MODIFICA EL TAILWIND.CONFIG.JS
+Agrega estas configuraciones EXACTAS al archivo tailwind.config.js en la sección extend:
+jsextend: {
+  screens: {
+    'xs': '320px',
+    'sm': '640px',
+    'md': '768px',
+  },
+  spacing: {
+    '18': '4.5rem',
+    '88': '22rem',
+  },
+  gridTemplateColumns: {
+    '8': 'repeat(8, minmax(0, 1fr))',
+    'odonto': 'repeat(8, minmax(35px, 1fr))',
+  },
+  // Agrega esta sección COMPLETA:
+  odontograma: {
+    'tooth-size': '35px',
+    'tooth-size-mobile': '30px',
+  }
+}
+PASO 2: ENCUENTRA Y MODIFICA EL COMPONENTE DEL ODONTOGRAMA
+Busca en estos lugares:
+
+client/src/components/
+client/src/pages/
+Cualquier archivo que contenga "odontograma" o "tooth" o "diente"
+
+PASO 3: REEMPLAZA EL CSS/CLASES DEL ODONTOGRAMA CON ESTO:
+jsx{/* Contenedor principal */}
+<div className="w-full max-w-full overflow-x-auto px-2 py-4">
+  
+  {/* Arcada Superior */}
+  <div className="mb-6">
+    <h3 className="text-center mb-2 text-sm font-medium">Arcada Superior</h3>
+    <div className="grid grid-cols-8 gap-1 xs:gap-0.5 justify-items-center max-w-full">
+      {/* Dientes 11-18 */}
+      {[18,17,16,15,14,13,12,11].map(num => (
+        <button 
+          key={num}
+          className="w-8 h-8 xs:w-7 xs:h-7 sm:w-9 sm:h-9 text-xs xs:text-[10px] sm:text-xs border-2 border-gray-300 rounded bg-white hover:bg-blue-50 flex items-center justify-center font-medium transition-all duration-200 active:scale-95"
+        >
+          {num}
+        </button>
+      ))}
+    </div>
+  </div>
+
+  {/* Arcada Superior Derecha */}
+  <div className="mb-6">
+    <div className="grid grid-cols-8 gap-1 xs:gap-0.5 justify-items-center max-w-full">
+      {/* Dientes 21-28 */}
+      {[21,22,23,24,25,26,27,28].map(num => (
+        <button 
+          key={num}
+          className="w-8 h-8 xs:w-7 xs:h-7 sm:w-9 sm:h-9 text-xs xs:text-[10px] sm:text-xs border-2 border-gray-300 rounded bg-white hover:bg-blue-50 flex items-center justify-center font-medium transition-all duration-200 active:scale-95"
+        >
+          {num}
+        </button>
+      ))}
+    </div>
+  </div>
+
+  {/* Arcada Inferior */}
+  <div className="mb-6">
+    <h3 className="text-center mb-2 text-sm font-medium">Arcada Inferior</h3>
+    <div className="grid grid-cols-8 gap-1 xs:gap-0.5 justify-items-center max-w-full">
+      {/* Dientes 41-48 */}
+      {[48,47,46,45,44,43,42,41].map(num => (
+        <button 
+          key={num}
+          className="w-8 h-8 xs:w-7 xs:h-7 sm:w-9 sm:h-9 text-xs xs:text-[10px] sm:text-xs border-2 border-gray-300 rounded bg-white hover:bg-blue-50 flex items-center justify-center font-medium transition-all duration-200 active:scale-95"
+        >
+          {num}
+        </button>
+      ))}
+    </div>
+  </div>
+
+  {/* Arcada Inferior Derecha */}
+  <div>
+    <div className="grid grid-cols-8 gap-1 xs:gap-0.5 justify-items-center max-w-full">
+      {/* Dientes 31-38 */}
+      {[31,32,33,34,35,36,37,38].map(num => (
+        <button 
+          key={num}
+          className="w-8 h-8 xs:w-7 xs:h-7 sm:w-9 sm:h-9 text-xs xs:text-[10px] sm:text-xs border-2 border-gray-300 rounded bg-white hover:bg-blue-50 flex items-center justify-center font-medium transition-all duration-200 active:scale-95"
+        >
+          {num}
+        </button>
+      ))}
+    </div>
+  </div>
+</div>
+PASO 4: VERIFICACIONES OBLIGATORIAS ANTES DE RESPONDER "LISTO":
+
+✅ Abre Chrome DevTools (F12)
+✅ Click en el ícono de móvil (responsive mode)
+✅ Selecciona "iPhone SE" (375x667)
+✅ Confirma que se ven EXACTAMENTE 4 filas de 8 dientes
+✅ Verifica que cada diente es clickeable
+✅ Prueba también en "Samsung Galaxy S8+" (360x740)
+✅ Confirma que NO hay scroll horizontal no deseado
+
+PASO 5: REPORTA EXACTAMENTE:
+
+¿En qué archivo encontraste el componente del odontograma?
+¿Qué cambios específicos hiciste?
+¿Confirmaste que funciona en móvil con DevTools?
+
+NO DIGAS "TERMINADO" HASTA COMPLETAR TODOS LOS PASOS Y VERIFICACIONES.
